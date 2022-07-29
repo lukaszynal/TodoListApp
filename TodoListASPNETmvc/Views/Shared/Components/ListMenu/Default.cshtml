@@ -1,0 +1,35 @@
+﻿@model MenuViewModel
+<p>
+    <a class="btn btn-block
+          @(ViewBag.SelectedList == "Today" ? "btn-dark": "btn-outline-dark")"
+       asp-action="Index" asp-controller="ListManager"
+       asp-route-listTitle="Today"
+       asp-route-tasksPage="1">
+        Today <span class="badge" style="background-color:brown">@Model.Tasks.Count(t => t.DueDate.Date.CompareTo(DateTime.Today) == 0) </span>
+    </a>
+    <a class="btn btn-block
+          @("Incomming" == ViewBag.SelectedList ? "btn-dark": "btn-outline-dark")"
+       asp-action="Index" asp-controller="ListManager"
+       asp-route-listTitle="Incomming"
+       asp-route-tasksPage="1">
+        Incomming <span class="badge" style="background-color:slategrey">@Model.Tasks.Count(t => t.DueDate.Date.CompareTo(DateTime.Today) > 0) </span>
+    </a>
+</p>
+<hr />
+<p>
+    <a class="nav-item margin-bottom" asp-action="Create" asp-controller="ListManager">
+        <svg class="bi d-block mx-auto mb-1" width="40" height="40"><use xlink:href="#plus-square-dotted" /></svg>
+    </a>
+</p>
+@foreach (string listTitle in Model.ListTitles)
+{
+    var listId = Model.Lists.Where(x => x.Title == listTitle).Select(x => x.ID).First();
+
+    <a class="btn btn-block
+          @(listTitle == ViewBag.SelectedList ? "btn-dark": "btn-outline-dark")"
+   asp-action="Index" asp-controller="ListManager"
+   asp-route-listTitle="@listTitle"
+   asp-route-tasksPage="1">
+        @listTitle <span class="badge" style="background-color:lightsteelblue">@Model.Tasks.Count(x => x.ToDoListID == listId) </span>
+    </a>
+}

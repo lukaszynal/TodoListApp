@@ -1,0 +1,110 @@
+﻿@using System.Globalization
+@model TodoListDal.Task
+
+<fieldset>
+    <legend />
+    <form asp-action="Edit" asp-controller="TaskManager">
+        <input type="hidden" asp-for="ToDoListID" />
+        <input type="hidden" asp-for="ID" />
+        <p>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Title</span>
+                </div>
+                <input asp-for="Title" type="text" class="form-control" />
+            </div>
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </p>
+        <p>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text ">Description</span>
+                </div>
+                <input asp-for="Description" class="form-control" />
+            </div>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </p>
+        <p>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text ">Notes</span>
+                </div>
+                <input asp-for="Notes" class="form-control" />
+            </div>
+            <span asp-validation-for="Notes" class="text-danger"></span>
+        </p>
+        <p>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text ">Due Date</span>
+                </div>
+                <input asp-for="DueDate" type="text" class="form-control" />
+            </div>
+            <span asp-validation-for="DueDate" class="text-danger"></span>
+        </p>
+        <p>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text ">Status</span>
+                </div>
+                <select asp-for="Status" class="form-control">
+                    <option selected>@Model.Status</option>
+                    <option value="Not Started">Not Started</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Completed">Completed</option>
+                </select>
+            </div>
+        </p>
+        <p>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text ">Visible</span>
+                </div>
+                <select asp-for="IsVisible" class="form-control">
+                    <option selected>@Model.IsVisible</option>
+                    <option value="True">True</option>
+                    <option value="False">False</option>
+                </select>
+            </div>
+        </p>
+        <p>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text ">Reminder</span>
+                </div>
+                <select asp-for="HasReminder" class="form-control">
+                    <option selected>@Model.HasReminder</option>
+                    <option value="True">True</option>
+                    <option value="False">False</option>
+                </select>
+            </div>
+        </p>
+        <p>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text ">Remind Before:</span>
+                </div>
+                <select asp-for="ReminderDuration" class="form-control">
+                    <option selected>0</option>
+                    <option value="1">1 hour</option>
+                    <option value="12">12 hour</option>
+                    <option value="24">1 day</option>
+                    <option value="48">2 day</option>
+                    <option value="168">1 week</option>
+                </select>
+            </div>
+        </p>
+        <p>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text ">Creation Date</span>
+                </div>
+                <input asp-for="CreationDate" type="text" class="form-control" disabled />
+            </div>
+            <span asp-validation-for="CreationDate" class="text-danger"></span>
+        </p>
+        <p>
+            <button type="submit" class="btn btn-primary">Apply</button>
+        </p>
+    </form>
+</fieldset>

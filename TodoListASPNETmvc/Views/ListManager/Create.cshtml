@@ -1,0 +1,20 @@
+﻿@using TodoListDal
+@using TodoListASPNETmvc.Infrastructure
+@model TodoListDal.TodoList
+
+<h4>Create new list</h4>
+<fieldset>
+    <legend />
+    <form asp-action="Create" asp-controller="ListManager">
+        <div class="input-group mb-3">
+        <p>
+            <div class="input-group-prepend">
+            <span class="input-group-text">Title</span>
+            </div>
+            <input asp-for="Title" type="text" class="form-control">
+            <button type="submit" class="btn btn-primary">Create</button>
+        </p>      
+        </div>
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </form>
+</fieldset>

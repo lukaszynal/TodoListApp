@@ -1,0 +1,51 @@
+﻿@model HomeViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h1>Hello  </h1>
+<p>Say goodbye to handwritten to-do lists with missing details, and say hello to having all the information you need to get your tasks done..</p>
+
+<div class="alert alert-warning" role="alert">
+    <h4>Your alerts</h4>
+    <p>
+        @if (Model.ReminderTasks.Any())
+        {
+            @foreach (var task in Model.ReminderTasks)
+            {
+                <partial name="Reminder_partial" model="task" />
+            }
+        }
+        else
+        {
+            <h6>no alerts</h6>
+        }
+    </p>
+</div>
+
+@if (Model.HiddenLists.Any())
+{
+    <p>
+        <div class="accordion" id="hiddenLists">
+            <div class="accordion-group">
+                <div class="accordion-heading">
+                    <button class="btn btn-block btn-light text-white" type="button" data-toggle="collapse" data-parent="#hiddenLists" href="#collapseHiddenLists">
+                        Hey! You have hidden lists
+                    </button>
+                </div>
+                <div id="collapseHiddenLists" class="accordion-body collapse in">
+                    <div class="accordion-inner">
+                        <div class="container">
+                            <p>
+                                @foreach (var list in Model.HiddenLists)
+                                {
+                                    <partial name="HiddenList_partial" model="list" />
+                                }
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </p>
+}

@@ -1,0 +1,144 @@
+﻿@model TodoListDal.Task
+@{
+    var collapseId = string.Concat("collapseTask" + Model.ID);
+    var collapseIdhref = string.Concat("#collapseTask" + Model.ID);
+    var setReminderId = string.Concat("setReminder" + Model.ID);
+    var setReminderhref = string.Concat("#setReminder" + Model.ID);
+    string statusIcon = "#x";
+    string textClass = "card-title";
+    string textStyle = "text-decoration: none";
+    string headerColor;
+
+    if (Model.Status == "Completed")
+    {
+        statusIcon = "#check";
+        textClass = "card-title text-muted";
+        textStyle = "text-decoration: line-through";
+        headerColor = "cadetblue";
+    }
+    else if (Model.Status == "In Progress")
+    {
+        textClass = "card-title text-muted";
+        headerColor = "dodgerblue";
+    }
+    else
+    {
+        headerColor = "gray";
+    }
+}
+
+<style type="text/css">
+    input:focus, input:active {
+        outline: none;
+    }
+</style>
+
+<div class="card text-center border-dark">
+    <div class="card-header" style="background-color:@headerColor">
+        <div class="row align-items-start text-white">
+            <div class="col">
+                <svg class="bi me-1" width="1em" height="1em"><use xlink:href="@statusIcon" /></svg>
+                @Model.Status
+            </div>
+            <div class="col">
+
+
+                @{
+                    if (Model.HasReminder)
+                    {
+                        <form asp-area="" asp-controller="TaskManager" asp-action="Reminder">
+                            <input type="hidden" asp-for="ID" />
+                            <input type="hidden" asp-for="ToDoListID" />
+                            <input type="hidden" asp-for="HasReminder" value="false" />
+                            <button class="btn btn-link" type="submit">
+                                <i class="fa fa-bell-o fa-fw large text-yellow" aria-hidden="true"></i>
+                            </button>
+                        </form>
+                    }
+                    else
+                    {
+                        <button class="btn btn-link" data-target="#@setReminderId" data-toggle="modal">
+                            <i class="fa fa-bell-o fa-fw large text-white" aria-hidden="true"></i>
+                        </button>
+
+                        <!-- Reminder Modal -->
+                        <div class="modal text-black" data-keyboard="false" data-backdrop="static" id="@setReminderId" tabindex="-1">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">@Model.Title</h4>
+                                    </div>
+                                    <form asp-area="" asp-controller="TaskManager" asp-action="Reminder">
+                                        <div class="modal-body">
+                                            <h5 class="modal-title">Set the length of time the notification will be visible on the home page before the due date of the task.</h5>
+                                            <p>
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text ">Time</span>
+                                                    </div>
+                                                    <select asp-for="ReminderDuration" class="form-control">
+                                                        <option selected>0</option>
+                                                        <option value="1">1 hour</option>
+                                                        <option value="12">12 hour</option>
+                                                        <option value="24">1 day</option>
+                                                        <option value="48">2 day</option>
+                                                        <option value="168">1 week</option>
+                                                    </select>
+                                                </div>
+                                            </p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                                            <input type="hidden" asp-for="ID" />
+                                            <input type="hidden" asp-for="ToDoListID" />
+                                            <input type="hidden" asp-for="HasReminder" value="true" />
+                                            <button type="submit" class="btn btn-primary">Save changes</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Reminder Modal -->
+                    }
+                }
+            </div>
+            <div class="col">
+                <svg class="bi me-1" width="1em" height="1em"><use xlink:href="#calendar-event" /></svg>
+                @Model.DueDate.ToString("dd/MM/yyyy hh:mm")
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <h5 class="@textClass" style="@textStyle">@Model.Title</h5>
+        <p class="@textClass" style="@textStyle">@Model.Description</p>
+        @if (!string.IsNullOrWhiteSpace(Model.Notes))
+        {
+            <hr />
+            <p class="text-muted">@Model.Notes</p>
+        }
+    </div>
+    <div class="card-footer bg-white">
+        <div class="accordion" id="taskOptions">
+            <div class="accordion-group">
+                <div class="accordion-heading">
+                    <button class="btn btn-block btn-light border-dark" type="button" data-toggle="collapse" data-parent="#taskOptions" href="@collapseIdhref">
+                        Options
+                    </button>
+                </div>
+                <div id="@collapseId" class="accordion-body collapse in">
+                    <div class="accordion-inner">
+                        <div class="container">
+                            <fieldset>
+                            <legend />
+                                <p>
+                                    <partial name="TaskOptions_partial" model="Model" />
+                                </p>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

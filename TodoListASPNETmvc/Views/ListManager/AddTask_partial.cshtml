@@ -1,0 +1,48 @@
+﻿@model TodoListDal.Task
+
+<fieldset>
+    <legend />
+    <form asp-action="AddTask" asp-controller="ListManager">
+        <input type="hidden" asp-for="ToDoListID" />
+        <input type="hidden" asp-for="ID" />
+        <p>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Title</span>
+                </div>
+                <input asp-for="Title" type="text" class="form-control" />
+            </div>
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </p>
+        <p>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text ">Description</span>
+                </div>
+                <input asp-for="Description" class="form-control" />
+            </div>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </p>
+        <p>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text ">Due Date</span>
+                </div>
+                <input asp-for="DueDate" class="form-control" />
+            </div>
+            <span asp-validation-for="DueDate" class="text-danger"></span>
+        </p>
+        <p>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text ">Notes</span>
+                </div>
+                <input asp-for="Notes" class="form-control" />
+            </div>
+            <span asp-validation-for="Notes" class="text-danger"></span>
+        </p>
+        <p>
+            <button type="submit" class="btn btn-primary">Add task</button>
+        </p>
+    </form>
+</fieldset>

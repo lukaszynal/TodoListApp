@@ -1,0 +1,26 @@
+﻿@model TodoListDal.TodoList
+@{
+    string isVisibleAction;
+    bool isVisibleValue;
+    if (Model.IsVisible)
+    {
+        isVisibleAction = "Hide";
+        isVisibleValue = false;
+    }
+    else
+    {
+        isVisibleAction = "Restore";
+        isVisibleValue = true;
+    }
+}
+
+<form asp-action="IsVisible" asp-controller="ListManager">
+    <input type="hidden" asp-for="ID" />
+    <input type="hidden" asp-for="Title" />
+    <input type="hidden" asp-for="IsVisible" value="@isVisibleValue" />
+    <div class="input-group mb-3">
+        <input asp-for="Title" type="text" class="form-control" disabled readonly/>
+        <button type="submit" class="btn btn-primary">@isVisibleAction</button>
+    </div>
+    <span asp-validation-for="Title" class="text-danger"></span>
+</form>

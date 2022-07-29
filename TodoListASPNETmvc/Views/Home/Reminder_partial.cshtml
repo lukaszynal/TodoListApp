@@ -1,0 +1,48 @@
+﻿@model TodoListDal.Task
+
+@{
+    var days = @Model.ReminderDuration / 24;
+    var hours = @Model.ReminderDuration % 24;
+    var ts = new TimeSpan(days, hours, 0, 0);
+    var startAlert = @Model.DueDate - ts;
+}
+
+@if (startAlert.CompareTo(DateTime.Now) < 0)
+{
+    if (Model.Status == "Completed")
+    {
+        <label class="list-group-item d-flex gap-3 text-black text-muted">
+            <span class="pt-1">
+                <svg class="bi me-1" width="1em" height="1em"><use xlink:href="#check" /></svg>
+                <strong>@Model.Title</strong>
+
+                <small class="d-block text-muted" style="text-indent:20px;">
+                    <svg class="bi me-1" width="1em" height="1em"><use xlink:href="#list-check" /></svg>
+                    @Model.Description
+                </small>
+                <small class="d-block text-muted" style="text-indent:20px;">
+                    <svg class="bi me-1" width="1em" height="1em"><use xlink:href="#calendar-event" /></svg>
+                    @Model.DueDate.ToString("dd/MM/yyyy hh:mm")
+                </small>
+            </span>
+        </label>
+    }
+    else
+    {
+        <label class="list-group-item d-flex gap-3 text-black">
+            <span class="pt-1">
+                <svg class="bi me-1" width="1em" height="1em"><use xlink:href="#x" /></svg>
+                <strong>@Model.Title</strong>
+
+                <small class="d-block" style="text-indent:20px;">
+                    <svg class="bi me-1 " width="1em" height="1em"><use xlink:href="#list-check" /></svg>
+                    @Model.Description
+                </small>
+                <small class="d-block" style="text-indent:20px;">
+                    <svg class="bi me-1" width="1em" height="1em"><use xlink:href="#calendar-event" /></svg>
+                    @Model.DueDate.ToString("dd/MM/yyyy hh:mm")
+                </small>
+            </span>
+        </label>
+    }
+}

@@ -1,0 +1,94 @@
+﻿@model TasksListViewModel
+@{
+    ViewData["Title"] = Model.CurrentList.Title;
+}
+
+<!-- Accordions -->
+<div class="accordion" id="listOptions">
+    <!-- Accordion List Options -->
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <button class="btn btn-block btn-secondary text-white border-dark" type="button" data-toggle="collapse" data-parent="#listOptions" href="#collapseOne">
+                List Options
+            </button>
+        </div>
+        <div id="collapseOne" class="accordion-body collapse in">
+            <div class="accordion-inner">
+                <div class="container">
+                    <fieldset>
+                        <legend />
+                        <p>
+                            <partial name="RenameList_partial" model="Model.CurrentList" />
+                        </p>
+                        <p>
+                            <partial name="ListOptions_partial" model="Model.CurrentList" />
+                        </p>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Accordion List Options -->
+    <!-- Accordion Add Task -->
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <button class="btn btn-block btn-secondary text-white border-dark" type="button" data-toggle="collapse" data-parent="#listOptions" href="#collapseTwo">
+                Add Task
+            </button>
+        </div>
+        <div id="collapseTwo" class="accordion-body collapse in">
+            <div class="accordion-inner">
+                <div class="container">
+                    <partial name="AddTask_partial" model="Model.CurrentTask" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Accordion Add Task -->
+</div>
+<!-- End Accordions -->
+<hr />
+
+<!-- Tasks -->
+@foreach (var task in Model.Tasks)
+{
+    <p>
+        <partial name="TaskSummary_partial" model="task" />
+    </p>
+}
+
+<div page-model="@Model.PagingInfo" page-action="Index" page-classes-enabled="true"
+     page-class="btn" page-class-normal="btn-outline-dark"
+     page-class-selected="btn-dark" page-url-listTitle="@Model.CurrentList.Title"
+     class="btn-group d-grid gap-2 d-md-block">
+</div>
+<!-- End Tasks -->
+
+<!-- Optionaly Hidden Tasks -->
+@if (Model.HiddenTasks.Any())
+{
+    <p>
+        <div class="accordion" id="hiddenTasks">
+            <div class="accordion-group">
+                <div class="accordion-heading">
+                    <button class="btn btn-block btn-light text-white" type="button" data-toggle="collapse" data-parent="#hiddenTasks" href="#collapseHidden">
+                        Hidden
+                    </button>
+                </div>
+                <div id="collapseHidden" class="accordion-body collapse in">
+                    <div class="accordion-inner">
+                        <div class="container">
+                            @foreach (var task in Model.HiddenTasks)
+                            {
+                                <p>
+                                    <partial name="TaskHiddenSummary_partial" model="task" />
+                                </p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </p>
+}
+<!-- End Optionaly Hidden Tasks -->

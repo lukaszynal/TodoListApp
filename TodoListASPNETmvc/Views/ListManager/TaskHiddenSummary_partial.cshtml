@@ -1,0 +1,47 @@
+﻿@model TodoListDal.Task
+@{
+    var collapseId = string.Concat("collapseTask" + Model.ID);
+    var collapseIdhref = string.Concat("#collapseTask" + Model.ID);
+    string statusIcon = Model.Status == "Completed" ? "#check" : "#x";
+}
+
+<div class="card text-center border-dark">
+    <div class="card-header" style="background-color:lightgrey">
+        <div class="row align-items-start text-white">
+            <div class="col">
+                <svg class="bi me-1" width="1em" height="1em"><use xlink:href="@statusIcon" /></svg>
+                @Model.Status
+            </div>
+            <div class="col">
+                <svg class="bi me-1" width="1em" height="1em"><use xlink:href="#calendar-event" /></svg>
+                @Model.DueDate.ToString("dd/MM/yyyy hh:mm")
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <h5 class="card-title text-muted">@Model.Title</h5>
+        <p class="card-title text-muted">@Model.Description</p>
+    </div>
+    <div class="card-footer bg-white">
+        <fieldset>
+            <legend />
+                <div class="nav justify-content-start">
+                    <div class="nav-item" style="margin-right:10px">
+                        <form asp-action="UpdateVisible" asp-controller="TaskManager">
+                            <input type="hidden" asp-for="ID" />
+                            <input type="hidden" asp-for="ToDoListID" />
+                            <input type="hidden" asp-for="IsVisible" value="true" />
+                            <button type="submit" class="btn my-2 my-sm-0 btn-outline-primary">Restore</button>
+                        </form>
+                    </div>
+                    <div class="nav-item" style="margin-right:10px">
+                        <form asp-action="Delete" asp-controller="TaskManager">
+                            <input type="hidden" asp-for="ID" />
+                            <input type="hidden" asp-for="ToDoListID" />
+                            <button type="submit" class="btn my-2 my-sm-0 btn-outline-danger">Delete</button>
+                        </form>
+                    </div>
+                </div>
+        </fieldset>
+    </div>
+</div>
