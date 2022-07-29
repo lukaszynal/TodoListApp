@@ -1,11 +1,11 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32516.85
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoListASPNETmvc", "TodoListASPNETmvc\TodoListASPNETmvc.csproj", "{8624882C-DD1C-4E48-B006-5D12C39F41A7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoListConsole", "TodoListConsole\ToDoListConsole.csproj", "{0910F1A9-3C01-47FB-B4CA-FC908E354AD7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoListConsole", "TodoListConsole\TodoListConsole.csproj", "{0910F1A9-3C01-47FB-B4CA-FC908E354AD7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoListDal", "TodoListDal\TodoListDal.csproj", "{0A020874-93A6-4062-9824-FBC602D511B4}"
 EndProject

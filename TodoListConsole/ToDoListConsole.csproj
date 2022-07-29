@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TodoListDal\TodoListDal.csproj" />
+
     <ProjectReference Include="..\TodoListDal\TodoListDal.csproj" />
   </ItemGroup>
 
