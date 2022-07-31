@@ -22,9 +22,9 @@ namespace TodoListASPNETmvc.Models.ViewModels
         public Task CurrentTask { get; set; }
         public TodoList CurrentList { get; set; }
 
-        public void Initialize(string listTitle, int tasksPage, int pageSize)
+        public void Initialize(string user, string listTitle, int tasksPage, int pageSize)
         {
-            CurrentList = _listRepository.GetByTitle(listTitle);
+            CurrentList = _listRepository.GetByTitle(listTitle, user);
 
             var allTasks = _taskRepository.GetTasks(CurrentList.ID);
             var hiddenTasksCount = allTasks.Count(x => !x.IsVisible);

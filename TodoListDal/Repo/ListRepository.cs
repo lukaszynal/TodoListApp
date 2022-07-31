@@ -23,9 +23,9 @@ namespace TodoListDal.Repo
             return context.TodoLists.First(x => x.ID == listId);
         }
 
-        public TodoList GetByTitle(string listTitle)
+        public TodoList GetByTitle(string listTitle, string user)
         {
-            return context.TodoLists.First(x => x.Title == listTitle);
+            return context.TodoLists.First(x => x.Title == listTitle && x.User == user);
         }
 
         public void Add(TodoList newList)

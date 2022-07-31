@@ -161,7 +161,7 @@ namespace ToDoListConsole
         {
             Console.Write("   Enter the title of new TODO-List: ");
             var title = Console.ReadLine();
-            TodoList newList = new TodoList { Title = title };
+            TodoList newList = new TodoList { Title = title, CreationDate = DateTime.Today, IsVisible = true, CompletedTasksVisible = true };
             _listRepository.Add(newList);
         }
 
@@ -220,7 +220,7 @@ namespace ToDoListConsole
             Console.Write("   Enter the Due Date: ");
             var dueDate = ValidationDateInput(Console.ReadLine());
 
-            Task newTask = new Task { Title = title, Description = description, DueDate = dueDate, ToDoListID = listId};
+            Task newTask = new Task { Title = title, Description = description, DueDate = dueDate, ToDoListID = listId, IsVisible = true, IsListVisible = true};
             _taskRepository.Add(newTask);
         }
 

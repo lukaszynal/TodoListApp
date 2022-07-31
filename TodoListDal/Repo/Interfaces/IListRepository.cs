@@ -7,7 +7,7 @@ namespace TodoListDal.Repo.Interfaces
     {
         List<TodoList> GetAll();
         TodoList GetById(int listId);
-        TodoList GetByTitle(string listTitle);
+        TodoList GetByTitle(string listTitle, string user);
         void Add(TodoList newList);
         void Rename(TodoList currentList);
         void Delete(int listId);

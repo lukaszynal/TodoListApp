@@ -42,9 +42,9 @@ namespace TodoListASPNETmvc.Models.Data
                 CreationDate = DateTime.Today
             });
 
-            int schoolList = listRepository.GetByTitle("School").ID;
-            int programmingList = listRepository.GetByTitle("Programming").ID;
-            int aspList = listRepository.GetByTitle("ASP.Net").ID;
+            int schoolList = listRepository.GetByTitle("School", "lukaszynal@gmail.com").ID;
+            int programmingList = listRepository.GetByTitle("Programming", "lukaszynal@gmail.com").ID;
+            int aspList = listRepository.GetByTitle("ASP.Net", "epam@gmail.com").ID;
 
             taskRepository.Add(new Task()
             {

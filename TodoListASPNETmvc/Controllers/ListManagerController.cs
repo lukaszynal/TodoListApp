@@ -39,7 +39,7 @@ namespace TodoListASPNETmvc.Controllers
             }
 
             var viewModel = new TasksListViewModel(_listRepository, _taskRepository);
-            viewModel.Initialize(ListTitle, TasksPage, PageSize);
+            viewModel.Initialize(user, ListTitle, TasksPage, PageSize);
             return View(viewModel);
         }
 

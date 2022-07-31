@@ -44,7 +44,7 @@ namespace TodoListApp.Tests
         [Order(2)]
         public void List_Compare(string title)
         {
-            TodoList currentListByTitle = this.listRepository.GetByTitle(title);
+            TodoList currentListByTitle = this.listRepository.GetByTitle(title, "testUser@asp.net");
             TodoList currentListById = this.listRepository.GetById(currentListByTitle.ID);
 
             Assert.AreEqual(currentListByTitle, currentListById);
@@ -54,7 +54,7 @@ namespace TodoListApp.Tests
         [Order(3)]
         public void List_Rename(string title)
         {
-            TodoList currentList = this.listRepository.GetByTitle("TestList");
+            TodoList currentList = this.listRepository.GetByTitle("TestList", "testUser@asp.net");
             TodoList renamedList = new TodoList() { ID = currentList.ID, Title = title, };
 
             this.listRepository.Rename(renamedList);
@@ -66,7 +66,7 @@ namespace TodoListApp.Tests
         [Order(4)]
         public void List_UpdateVisible(string title, bool isVisible)
         {
-            TodoList currentList = this.listRepository.GetByTitle(title);
+            TodoList currentList = this.listRepository.GetByTitle(title, "testUser@asp.net");
             var beforeUpdate = currentList.IsVisible;
             TodoList updatedList = new TodoList() { ID = currentList.ID, IsVisible = isVisible, };
 
@@ -80,7 +80,7 @@ namespace TodoListApp.Tests
         [Order(5)]
         public void List_UpdateTasksVisible(string title, bool completedTasksVisible)
         {
-            TodoList currentList = this.listRepository.GetByTitle(title);
+            TodoList currentList = this.listRepository.GetByTitle(title, "testUser@asp.net");
             var beforeUpdate = currentList.CompletedTasksVisible;
             TodoList updatedList = new TodoList() { ID = currentList.ID, IsVisible = completedTasksVisible, };
 
@@ -97,7 +97,7 @@ namespace TodoListApp.Tests
         [Order(6)]
         public void Task_Add(string listTitle, string title, string description, DateTime dueDate, string status, string notes, bool visible, bool hasReminder, int reminderDuration, string user, DateTime creationDate)
         {
-            TodoList list = this.listRepository.GetByTitle(listTitle);
+            TodoList list = this.listRepository.GetByTitle(listTitle, "testUser@asp.net");
             int beforeAdd = this.taskRepository.GetTasks(list.ID).Count;
             Task newTask = new Task
             {
@@ -197,7 +197,7 @@ namespace TodoListApp.Tests
         [Order(11)]
         public void Task_Delete(string listTitle, string taskTitle)
         {
-            TodoList list = this.listRepository.GetByTitle(listTitle);
+            TodoList list = this.listRepository.GetByTitle(listTitle, "testUser@asp.net");
             int beforeDelete = this.taskRepository.GetTasks(list.ID).Count;
             Task task = this.taskRepository.GetTasks(list.ID).First(x => x.Title == taskTitle);
 
@@ -212,7 +212,7 @@ namespace TodoListApp.Tests
         [Order(12)]
         public void List_Clear(string listTitle)
         {
-            TodoList list = this.listRepository.GetByTitle(listTitle);
+            TodoList list = this.listRepository.GetByTitle(listTitle, "testUser@asp.net");
             int beforeClear = this.taskRepository.GetTasks(list.ID).Count;
             this.taskRepository.ClearList(list.ID);
 
@@ -227,7 +227,7 @@ namespace TodoListApp.Tests
         public void List_Delete(string title)
         {
             int beforeDelete = this.listRepository.GetAll().Count;
-            TodoList list = this.listRepository.GetByTitle(title);
+            TodoList list = this.listRepository.GetByTitle(title, "testUser@asp.net");
 
             this.listRepository.Delete(list.ID);
 
