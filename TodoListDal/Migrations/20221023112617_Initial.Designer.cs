@@ -10,7 +10,7 @@ using TodoListDal.Repo;
 namespace TodoListDal.Migrations
 {
     [DbContext(typeof(TodoListDataDbContext))]
-    [Migration("20221020202811_Initial")]
+    [Migration("20221023112617_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,7 +21,7 @@ namespace TodoListDal.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("TodoListDal.Task", b =>
+            modelBuilder.Entity("TodoListDal.Models.Task", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -69,7 +69,7 @@ namespace TodoListDal.Migrations
                     b.Property<int>("ToDoListID")
                         .HasColumnType("int");
 
-                    b.Property<string>("User")
+                    b.Property<string>("UserName")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
@@ -79,32 +79,46 @@ namespace TodoListDal.Migrations
                     b.ToTable("Tasks");
                 });
 
-            modelBuilder.Entity("TodoListDal.TaskHistory", b =>
+            modelBuilder.Entity("TodoListDal.Models.TaskHistory", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DeleteDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("DueDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TaskID")
+                        .HasColumnType("int");
+
                     b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
 
                     b.ToTable("TasksHistory");
                 });
 
-            modelBuilder.Entity("TodoListDal.TodoList", b =>
+            modelBuilder.Entity("TodoListDal.Models.TodoList", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -133,9 +147,9 @@ namespace TodoListDal.Migrations
                     b.ToTable("TodoLists");
                 });
 
-            modelBuilder.Entity("TodoListDal.Task", b =>
+            modelBuilder.Entity("TodoListDal.Models.Task", b =>
                 {
-                    b.HasOne("TodoListDal.TodoList", "TodoList")
+                    b.HasOne("TodoListDal.Models.TodoList", "TodoList")
                         .WithMany("Tasks")
                         .HasForeignKey("ToDoListID")
                         .OnDelete(DeleteBehavior.Cascade)

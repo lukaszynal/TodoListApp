@@ -13,9 +13,15 @@ namespace TodoListDal.Migrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(maxLength: 50, nullable: false),
-                    Description = table.Column<string>(maxLength: 100, nullable: false),
-                    DueDate = table.Column<DateTime>(nullable: false)
+                    TaskID = table.Column<int>(nullable: false),
+                    Title = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    DueDate = table.Column<DateTime>(nullable: false),
+                    Status = table.Column<string>(nullable: true),
+                    Notes = table.Column<string>(nullable: true),
+                    CreationDate = table.Column<DateTime>(nullable: false),
+                    UserName = table.Column<string>(nullable: true),
+                    DeleteDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -56,7 +62,7 @@ namespace TodoListDal.Migrations
                     IsListVisible = table.Column<bool>(nullable: false),
                     HasReminder = table.Column<bool>(nullable: false),
                     ReminderDuration = table.Column<int>(nullable: false),
-                    User = table.Column<string>(nullable: true),
+                    UserName = table.Column<string>(nullable: true),
                     EditMode = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
