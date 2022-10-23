@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TodoListDal
+namespace TodoListDal.Models
 {
     public class Task
     {
@@ -42,8 +42,8 @@ namespace TodoListDal
         public bool IsListVisible { get; set; }
         public bool HasReminder { get; set; }
         public int ReminderDuration { get; set; }
-        public string User { get; set; }
-        public bool EditMode { get; set; }       
+        public string UserName { get; set; }
+        public bool EditMode { get; set; }
         public TodoList TodoList { get; set; }
     }
 }

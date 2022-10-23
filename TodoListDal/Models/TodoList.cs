@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace TodoListDal
+namespace TodoListDal.Models
 {
     public class TodoList
     {

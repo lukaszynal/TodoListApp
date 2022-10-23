@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
-using TodoListDal;
+using TodoListDal.Models;
 using TodoListDal.Repo.Interfaces;
 
 namespace TodoListASPNETmvc.Controllers

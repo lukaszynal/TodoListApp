@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using TodoListDal.Models;
 using TodoListDal.Repo.Interfaces;
 
 namespace TodoListDal.Repo

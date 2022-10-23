@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using TodoListDal;
+using TodoListDal.Models;
 
 namespace TodoListASPNETmvc.Models.ViewModels
 {

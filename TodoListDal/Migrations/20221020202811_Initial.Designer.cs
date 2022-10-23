@@ -10,8 +10,8 @@ using TodoListDal.Repo;
 namespace TodoListDal.Migrations
 {
     [DbContext(typeof(TodoListDataDbContext))]
-    [Migration("20220727113600_FinalVersion")]
-    partial class FinalVersion
+    [Migration("20221020202811_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -77,6 +77,31 @@ namespace TodoListDal.Migrations
                     b.HasIndex("ToDoListID");
 
                     b.ToTable("Tasks");
+                });
+
+            modelBuilder.Entity("TodoListDal.TaskHistory", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<DateTime>("DueDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.HasKey("ID");
+
+                    b.ToTable("TasksHistory");
                 });
 
             modelBuilder.Entity("TodoListDal.TodoList", b =>

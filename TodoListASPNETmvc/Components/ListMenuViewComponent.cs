@@ -30,7 +30,7 @@ namespace TodoListASPNETmvc.Components
                 .Where(t => t.User == User.Identity.Name && t.IsVisible),
 
                 Tasks = _taskRepository.GetAll()
-                .Where(t => t.User == User.Identity.Name && t.IsVisible && t.IsListVisible),
+                .Where(t => t.UserName == User.Identity.Name && t.IsVisible && t.IsListVisible),
             }) ;
 
 

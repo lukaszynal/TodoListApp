@@ -1,0 +1,58 @@
+﻿@model StatisticsViewModel
+@{
+    ViewData["Title"] = "Statistics Page";
+}
+@{
+    var allTasks = Model.AllTasks.Count();
+    var userTasks = Model.AllTasks.Count(x => x.UserName == Model.User);
+    var othersTasks = Model.AllTasks.Count(x => x.UserName != Model.User);
+    var notStarted = Model.AllTasks.Count(x => x.Status == "Not Started" && x.UserName == Model.User);
+    var inProgress = Model.AllTasks.Count(x => x.Status == "In Progress" && x.UserName == Model.User);
+    var completed = Model.AllTasks.Count(x => x.Status == "Completed" && x.UserName == Model.User);
+}
+
+<script type="text/javascript">
+
+    window.onload = function() {
+        var userTasks = new CanvasJS.Chart("chartContainer1", {
+            theme: "light2",
+            animationEnabled: true,
+            title: {
+                text: "Your tasks: @userTasks"
+            },
+            data: [
+                {
+                    type: "pie",
+                    dataPoints: [
+                        { y: @notStarted, label: "Not Started" },
+                        { y: @inProgress, label: "In Progress" },
+                        { y: @completed, label: "Completed" },                       
+                    ]
+                }
+            ]
+        });
+
+        var allTasks = new CanvasJS.Chart("chartContainer2", {
+            theme: "light2",
+            animationEnabled: true,
+            title: {
+                text: "All tasks in database: @allTasks"
+            },
+            data: [
+                {
+                    type: "pie",
+                    dataPoints: [
+                        { y: @userTasks, label: "Your tasks" },
+                        { y: @othersTasks, label: "Other users tasks" },                       
+                    ]
+                }
+            ]
+        });
+
+        userTasks.render();
+        allTasks.render();
+    };
+</script>
+
+<div id="chartContainer1" style="height: 370px; width: 100%;"></div>
+<div id="chartContainer2" style="height: 370px; width: 100%;"></div>
