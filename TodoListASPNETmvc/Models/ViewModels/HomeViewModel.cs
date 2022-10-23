@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using TodoListDal;
+using TodoListDal.Models;
 using TodoListDal.Repo.Interfaces;
 
 namespace TodoListASPNETmvc.Models.ViewModels
@@ -21,7 +21,7 @@ namespace TodoListASPNETmvc.Models.ViewModels
         public void Initialize(string user)
         {
             ReminderTasks = _taskRepository.GetAll()
-                .Where(x => x.User == user &&
+                .Where(x => x.UserName == user &&
                             x.IsVisible &&
                             x.IsListVisible &&
                             x.Status != "Completed" &&

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using TodoListDal;
+using TodoListDal.Models;
 using TodoListDal.Repo.Interfaces;
 
 namespace TodoListASPNETmvc.Models.ViewModels
@@ -22,7 +22,7 @@ namespace TodoListASPNETmvc.Models.ViewModels
         public void Today(string user, int tasksPage, int pageSize)
         {
             var todayTasks = _taskRepository.GetAll().Where(t =>
-                t.User == user &&
+                t.UserName == user &&
                 t.IsVisible &&
                 t.IsListVisible &&
                 t.DueDate.Date.CompareTo(DateTime.Today) == 0);
@@ -48,7 +48,7 @@ namespace TodoListASPNETmvc.Models.ViewModels
         public void Incomming(string user, int tasksPage, int pageSize)
         {
             var incommingTasks = _taskRepository.GetAll().Where(t =>
-                t.User == user &&
+                t.UserName == user &&
                 t.IsVisible &&
                 t.IsListVisible &&
                 t.DueDate.Date.CompareTo(DateTime.Today) > 0);

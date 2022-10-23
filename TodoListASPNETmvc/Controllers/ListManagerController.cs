@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using TodoListASPNETmvc.Models.ViewModels;
-using TodoListDal;
+using TodoListDal.Models;
 using TodoListDal.Repo.Interfaces;
 
 namespace TodoListASPNETmvc.Controllers
@@ -88,7 +88,7 @@ namespace TodoListASPNETmvc.Controllers
                     Title = task.Title,
                     Description = task.Description,
                     DueDate = task.DueDate,
-                    User = task.User,
+                    UserName = task.UserName,
                     CreationDate = DateTime.Now,
                     Status = task.Status,
                     IsVisible = task.IsVisible,
@@ -143,7 +143,7 @@ namespace TodoListASPNETmvc.Controllers
             {
                 return View("AddTask_partial", CurrentTask);
             }
-            CurrentTask.User = User.Identity.Name;
+            CurrentTask.UserName = User.Identity.Name;
             CurrentTask.CreationDate = DateTime.Now;
             CurrentTask.Status = "Not Started";
             CurrentTask.IsVisible = true;

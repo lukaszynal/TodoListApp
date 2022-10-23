@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using NUnit.Framework;
-using TodoListDal;
+using TodoListDal.Models;
 using TodoListDal.Repo;
 using TodoListDal.Repo.Interfaces;
 
@@ -109,7 +109,7 @@ namespace TodoListApp.Tests
                 IsVisible = visible,
                 HasReminder = hasReminder,
                 ReminderDuration = reminderDuration,
-                User = user,
+                UserName = user,
                 CreationDate = creationDate,
                 ToDoListID = list.ID,
             };
